@@ -1,0 +1,126 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { ShoppingCart, Heart } from "lucide-react"
+import { useState } from "react"
+import ring from "../assets/ring.webp"
+
+const ProductCard = ({ product, index }) => {
+  const [isLiked, setIsLiked] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500"
+    >
+      {/* Image Container */}
+      <div className="relative aspect-[3/4] overflow-hidden" style={{ backgroundColor: "rgba(138, 138, 138, 0.1)" }}>
+        <motion.img
+          src={ring}
+          alt={product.name}
+          className="w-full h-full object-cover"
+          animate={{ scale: isHovered ? 1.1 : 1 }}
+          transition={{ duration: 0.6 }}
+        />
+
+        {/* Overlay on hover */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(15, 53, 44, 0.8), rgba(15, 53, 44, 0.4), transparent)" }}
+        />
+
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+          transition={{ duration: 0.3 }}
+          className="absolute bottom-4 left-4 right-4 flex gap-2"
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex-1 py-3 font-medium rounded-xl flex items-center justify-center gap-2 transition-colors duration-300"
+            style={{ backgroundColor: "var(--color-accent)", color: "var(--color-text-light)" }}
+          >
+            <ShoppingCart className="w-4 h-4" />
+            Agregar
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsLiked(!isLiked)}
+            className={`p-3 rounded-xl transition-colors duration-300 ${
+              isLiked ? "bg-red-500 text-white" : "bg-white/90"
+            }`}
+            style={!isLiked ? { color: "var(--color-text-dark)" } : {}}
+          >
+            <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
+          </motion.button>
+        </motion.div>
+
+        {/* Badge */}
+        {product.isNew && (
+          <motion.div
+            initial={{ scale: 0, rotate: -12 }}
+            animate={{ scale: 1, rotate: -12 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full"
+            style={{ backgroundColor: "var(--color-accent)", color: "var(--color-text-light)" }}
+          >
+            NUEVO
+          </motion.div>
+        )}
+      </div>
+
+      {/* Product Info */}
+      <div className="p-6">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+          <p className="text-sm uppercase tracking-wide mb-2" style={{ color: "var(--color-muted)" }}>
+            {product.brand}
+          </p>
+          <h3
+            className="text-lg font-semibold mb-3 line-clamp-2"
+            style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-dark)" }}
+          >
+            {product.name}
+          </h3>
+
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span
+                className="text-2xl font-bold"
+                style={{ fontFamily: "var(--font-heading)", color: "var(--color-primary)" }}
+              >
+                ${product.price || "99.99"}
+              </span>
+              {product.oldPrice && (
+                <span className="text-sm line-through" style={{ color: "var(--color-muted)" }}>
+                  ${product.oldPrice}
+                </span>
+              )}
+            </div>
+
+            {product.rating && (
+              <div className="flex items-center gap-1">
+                <span className="text-lg" style={{ color: "var(--color-accent)" }}>
+                  ★
+                </span>
+                <span className="text-sm font-medium">{product.rating}</span>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  )
+}
+
+export default ProductCard
