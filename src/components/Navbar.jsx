@@ -22,10 +22,12 @@ const Navbar = () => {
   }, [])
 
   const navItems = [
-    { name: "Shop", href: "#products" },
-    { name: "Collections", href: "#collections" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "Inicio", href: "#products" },
+    { name: "Productos", href: "#collections" },
+    { name: "Nosotros", href: "#about" },
+    { name: "Contato", href: "#contact" },
+    { name: "Preguntas frequentes", href: "#contact" },
+
   ]
 
   return (

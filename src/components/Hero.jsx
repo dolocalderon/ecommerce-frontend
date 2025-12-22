@@ -50,7 +50,7 @@ const Hero = () => {
               className="inline-block px-6 py-2 backdrop-blur-sm text-sm font-medium rounded-full mb-8"
               style={{ backgroundColor: "rgba(212, 165, 116, 0.9)", color: "var(--color-text-light)" }}
             >
-              Nueva Colección 2024
+              Nueva Colección 2026
             </span>
           </motion.div>
 

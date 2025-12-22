@@ -2,7 +2,7 @@
 
 @theme {
   /* Modern color palette - Elegant greens with warm neutrals */
-  --color-primary: #0f352c;
+  --color-primary: #0f352c; 
   --color-primary-light: #1a5246;
   --color-accent: #d4a574;
   --color-accent-hover: #c49563;

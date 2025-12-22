@@ -1,5 +1,3 @@
-"use client"
-
 import { motion } from "framer-motion"
 import { ShoppingCart, Heart } from "lucide-react"
 import { useState } from "react"
@@ -20,7 +18,7 @@ const ProductCard = ({ product, index }) => {
       className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500"
     >
       {/* Image Container */}
-      <div className="relative aspect-[3/4] overflow-hidden" style={{ backgroundColor: "rgba(138, 138, 138, 0.1)" }}>
+      <div className="relative overflow-hidden">
         <motion.img
           src={ring}
           alt={product.name}
@@ -37,7 +35,6 @@ const ProductCard = ({ product, index }) => {
           style={{ background: "linear-gradient(to top, rgba(15, 53, 44, 0.8), rgba(15, 53, 44, 0.4), transparent)" }}
         />
 
-        {/* Quick Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
