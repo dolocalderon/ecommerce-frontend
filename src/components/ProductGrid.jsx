@@ -4,18 +4,11 @@ import { motion } from "framer-motion"
 import { useArticle } from "../utils/context/useArticle"
 import ProductCard from "./ProductCard"
 import { Loader2 } from "lucide-react"
+import { Link } from "react-router-dom"
+
 
 const ProductGrid = () => {
   const { articles, loading } = useArticle()
-
-  // Add demo data with more details
-  const enrichedProducts = articles.map((article, index) => ({
-    ...article,
-    price: (Math.random() * 200 + 50).toFixed(2),
-    rating: (Math.random() * 2 + 3).toFixed(1),
-    isNew: index % 3 === 0,
-    oldPrice: index % 2 === 0 ? (Math.random() * 50 + 150).toFixed(2) : null,
-  }))
 
   if (loading) {
     return (
@@ -63,9 +56,10 @@ const ProductGrid = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {enrichedProducts.map((product, index) => (
+          {articles.slice(0, 8).map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
+
         </div>
 
         {/* Load More Button */}
@@ -76,15 +70,18 @@ const ProductGrid = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-16"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 font-medium rounded-full transition-colors duration-300 shadow-lg"
-            style={{ backgroundColor: "var(--color-primary)", color: "var(--color-text-light)" }}
-          >
-            Ver Más Productos
-          </motion.button>
+          <Link to="/products">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 font-medium rounded-full transition-colors duration-300 shadow-lg"
+              style={{ backgroundColor: "var(--color-primary)", color: "var(--color-text-light)" }}
+            >
+              Ver Más Productos
+            </motion.button>
+          </Link>
         </motion.div>
+
       </div>
     </section>
   )

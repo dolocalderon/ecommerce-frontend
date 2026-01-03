@@ -18,6 +18,7 @@ const ProductCard = ({ product, index }) => {
       className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500"
     >
       {/* Image Container */}
+      {/* TO DO: VER COMO SOLUCIONAR TEMA DE IMAGENES */}
       <div className="relative overflow-hidden">
         <motion.img
           src={ring}
@@ -27,7 +28,6 @@ const ProductCard = ({ product, index }) => {
           transition={{ duration: 0.6 }}
         />
 
-        {/* Overlay on hover */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
@@ -47,6 +47,7 @@ const ProductCard = ({ product, index }) => {
             className="flex-1 py-3 font-medium rounded-xl flex items-center justify-center gap-2 transition-colors duration-300"
             style={{ backgroundColor: "var(--color-accent)", color: "var(--color-text-light)" }}
           >
+            {/* TO DO: CREAR SHOPPING CART PARA PODER AGREGAR PRODUCTOS */}
             <ShoppingCart className="w-4 h-4" />
             Agregar
           </motion.button>
@@ -55,10 +56,11 @@ const ProductCard = ({ product, index }) => {
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsLiked(!isLiked)}
             className={`p-3 rounded-xl transition-colors duration-300 ${
-              isLiked ? "bg-red-500 text-white" : "bg-white/90"
+              isLiked ? "bg-red-300/60 text-white" : "bg-white/90"
             }`}
             style={!isLiked ? { color: "var(--color-text-dark)" } : {}}
           >
+            {/* TO DO: AGREGAR ACCIONES CON LIKES */}
             <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
           </motion.button>
         </motion.div>
@@ -96,13 +98,8 @@ const ProductCard = ({ product, index }) => {
                 className="text-2xl font-bold"
                 style={{ fontFamily: "var(--font-heading)", color: "var(--color-primary)" }}
               >
-                ${product.price || "99.99"}
+                ${product.price.amount || "99.99"}
               </span>
-              {product.oldPrice && (
-                <span className="text-sm line-through" style={{ color: "var(--color-muted)" }}>
-                  ${product.oldPrice}
-                </span>
-              )}
             </div>
 
             {product.rating && (

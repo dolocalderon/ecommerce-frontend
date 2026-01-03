@@ -3,6 +3,8 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ShoppingCart, Menu, X, Search, User } from "lucide-react"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,18 +24,17 @@ const Navbar = () => {
   }, [])
 
   const navItems = [
-    { name: "Inicio", href: "#products" },
-    { name: "Productos", href: "#collections" },
+    { name: "Inicio", href: "/" },
+    { name: "Productos", href: "/products" },
     { name: "Nosotros", href: "#about" },
     { name: "Contato", href: "#contact" },
     { name: "Preguntas frequentes", href: "#contact" },
-
   ]
 
   return (
     <motion.nav
       style={{ backgroundColor, backdropFilter: backdropBlur }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${scrolled ? "shadow-lg" : ""}`}
+      className="fixed top-0 left-0 right-0 z-50 transition-shadow duration-300"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -73,21 +74,19 @@ const Navbar = () => {
             className="hidden md:flex items-center space-x-8"
           >
             {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
-                className="font-medium relative group"
-                style={{ color: "var(--color-text-dark)" }}
-              >
-                {item.name}
-                <span
-                  className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
-                  style={{ backgroundColor: "var(--color-primary)" }}
-                />
-              </motion.a>
+              <motion.div>
+                <Link
+                  to={item.href}
+                  className="font-medium relative group"
+                  style={{ color: "var(--color-text-dark)" }}
+                >
+                  {item.name}
+                  <span
+                    className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  />
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -148,18 +147,19 @@ const Navbar = () => {
       >
         <div className="px-4 py-6 space-y-4">
           {navItems.map((item, index) => (
-            <motion.a
-              key={item.name}
-              href={item.href}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              onClick={() => setIsOpen(false)}
-              className="block text-lg font-medium transition-colors"
-              style={{ color: "var(--color-text-dark)" }}
-            >
-              {item.name}
-            </motion.a>
+            <motion.div>
+              <Link
+                to={item.href}
+                className="font-medium relative group"
+                style={{ color: "var(--color-text-dark)" }}
+              >
+                {item.name}
+                <span
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                  style={{ backgroundColor: "var(--color-primary)" }}
+                />
+              </Link>
+            </motion.div>
           ))}
           <div className="flex items-center space-x-4 pt-4 border-t" style={{ borderColor: "var(--color-border)" }}>
             <button className="p-2 rounded-full transition-colors">
