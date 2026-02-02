@@ -23,6 +23,7 @@ export const ArticleProvider = ({ children }) => {
             if (response.ok) {
                 const data = await response.json();
                 setArticles(data);
+                console.log("ARTICLES FROM BACKEND:", data);
             } else {
                 console.error("Error al obtener los productos, codigo de estado:", response.status);
                 setArticles([]);

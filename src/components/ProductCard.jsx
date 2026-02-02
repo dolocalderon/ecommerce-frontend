@@ -64,19 +64,6 @@ const ProductCard = ({ product, index }) => {
             <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
           </motion.button>
         </motion.div>
-
-        {/* Badge */}
-        {product.isNew && (
-          <motion.div
-            initial={{ scale: 0, rotate: -12 }}
-            animate={{ scale: 1, rotate: -12 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="absolute top-4 right-4 px-3 py-1 text-xs font-bold rounded-full"
-            style={{ backgroundColor: "var(--color-accent)", color: "var(--color-text-light)" }}
-          >
-            NUEVO
-          </motion.div>
-        )}
       </div>
 
       {/* Product Info */}
@@ -98,18 +85,10 @@ const ProductCard = ({ product, index }) => {
                 className="text-2xl font-bold"
                 style={{ fontFamily: "var(--font-heading)", color: "var(--color-primary)" }}
               >
-                ${product.price.amount || "99.99"}
+                ${product.price?.amount || "Consultar"}
               </span>
             </div>
 
-            {product.rating && (
-              <div className="flex items-center gap-1">
-                <span className="text-lg" style={{ color: "var(--color-accent)" }}>
-                  ★
-                </span>
-                <span className="text-sm font-medium">{product.rating}</span>
-              </div>
-            )}
           </div>
         </motion.div>
       </div>
